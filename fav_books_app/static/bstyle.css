@@ -1,0 +1,47 @@
+/* Books home page  */
+
+.messages{
+    font-size: small;
+    color: brown;
+    margin-left: 5%;
+}
+.header h2, a{
+    display: inline-block;
+    vertical-align: top;
+}
+.header a{
+    margin-left: 65%;
+}
+.add_book, .book_list{
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+.add_book{
+    margin: 15px 60px 0 0;
+}
+.add_book label, input{
+    display: block;
+}
+.add_book button{
+    margin: 15px 0 0 0;
+}
+span{
+    font-style: italic;
+}
+ul{
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+.edit_book, .users_fav{
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+}
+.edit_book button{
+    margin: 15px 0 0 10px;
+}
+.users_fav li::before{
+    content: " - ";
+    margin-left: 45px;
+}

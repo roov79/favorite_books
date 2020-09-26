@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Login & Registration</title>
+</head>
+<body>
+    
+    <div class="wrapper">
+
+        <h1>Welcome to your Favorite Books App !</h1>
+        <div class="messages">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <form action="/register" method="POST" class="reg_form">
+            {% csrf_token %}
+            <h3>Registration</h3>
+            <label for="first_name">First Name</label><input type="text" name="first_name" id="first_name">
+            <label for="last_name">Last Name</label><input type="text" name="last_name" id="last_name">
+            <label for="email">Email</label><input type="email" name="email" id="email">
+            <label for="password">Password</label><input type="password" name="password" id="password">
+            <label for="confirm_pw">Confirm Password</label><input type="password" name="confirm_pw" id="confirm_pw">
+            <button type="submit">Register</button>
+        </form>
+        
+        <form action="/login" method="POST" class="log_form">
+            {% csrf_token %}
+            <h3>Log In</h3>
+            <label for="email">Email</label><input type="email" name="email" id="email">
+            <label for="password">Password</label><input type="password" name="password" id="password">
+            <button type="submit">Log In</button>
+        </form>
+
+    </div>
+</body>
+</html>

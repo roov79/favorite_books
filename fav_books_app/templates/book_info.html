@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'bstyle.css' %}">
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <div class="header">
+            <h2>Welcome {{user.first_name}} !</h2>
+            <a href="/logout">log out</a> 
+        </div>
+        <a href="/books">Go back</a>
+        <hr>
+        <div class="messages_books">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="edit_book">
+            <form action="/edit_book/{{book.id}}" method="POST">
+                {% csrf_token %}
+                {% if user.id == book.uploaded_by.id %}
+                    <label for="title"></label><input type="text" name="title" value="{{ book.title }}">
+                {% else %}
+                    <h2>{{ book.title }}</h2>
+                {% endif %}
+                <p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+                <p>Added on: {{ book.created_at }}</p>
+                <p>Last updated on: {{ book.updated_at }}</p>
+                {% if user.id == book.uploaded_by.id %}
+                    <label for="">Description</label><input type="text" name="desc" value="{{ book.description }}">
+                    <button type="submit">Edit</button>
+                    <button type="submit"><a href="/delete_book/{{book.id}}">Delete</a></button>
+                {% else %}
+                    <p>Description: {{ book.description }}</p>
+                {% endif %}
+            </form>
+        </div>
+        
+        <div class="users_fav">
+            <h4>Users Who Like This Book:</h4>
+            {% for user in book.users_likes.all %}
+            <ul>
+                <li>{{user.first_name}} {{user.last_name}}</li>
+            </ul>
+            {% endfor %}
+            {% if user not in book.users_likes.all %}
+                <a href="/favorite/{{book.id}}">Add to Favorites</a>
+            {% else %}
+                <a href="/unfavorite/{{book.id}}">Remove from your Favorites</a>
+            {% endif %} 
+        </div>
+
+    </div>
+
+</body>
+</html>
