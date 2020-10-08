@@ -7,4 +7,4 @@ Favorite Books page with login and registration
 - Use a One to Many and Many to Many relationships between Classes to make connections within the DB
 - Use Django framework to pull and push database information.
 - Use Bootstrap and CSS to visualize every page and list.
-- There is a JPG file to see the front page of the app.
+- There is a JPG file to see the app.
